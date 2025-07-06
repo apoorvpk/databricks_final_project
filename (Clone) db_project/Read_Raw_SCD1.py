@@ -147,3 +147,18 @@ else:
   spark.sql(merge_query)
 
 
+
+# COMMAND ----------
+
+df3 = spark.table("amazon_sales_report")
+display(df3)
+
+# COMMAND ----------
+
+# Save as Parquet
+df3.write.mode("overwrite").parquet("/mnt/databricksoutput/SCD1/Parquet")
+
+# COMMAND ----------
+
+# Or save as Delta
+df3.write.format("delta").mode("overwrite").save("/mnt/databricksoutput/SCD1/Delta")

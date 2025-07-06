@@ -191,3 +191,19 @@ WHEN NOT MATCHED THEN
 
 # MAGIC %sql
 # MAGIC select * from pl_march_sales_report
+
+# COMMAND ----------
+
+df3 = spark.table("pl_march_sales_report")
+display(df3)
+
+# COMMAND ----------
+
+
+# Save as Parquet
+df3.write.mode("overwrite").parquet("/mnt/databricksoutput/SCD2/Parquet")
+
+# COMMAND ----------
+
+# Or save as Delta
+df3.write.format("delta").mode("overwrite").save("/mnt/databricksoutput/SCD2/Delta")
